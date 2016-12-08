@@ -19,6 +19,7 @@ defmodule Bot.MessageHandler do
 
   def handle_cast({:message, provider, %Message{} = msg}, _state) do
     sesh = session_id(msg)
+    token = @wit_access_token
     Wit.run_actions(@wit_access_token, sesh, WeatherActions, msg.text)
     {:noreply, :ok}
   end

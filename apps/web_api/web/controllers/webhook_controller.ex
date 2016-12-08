@@ -11,6 +11,7 @@ defmodule WebApi.WebhookController do
   end
 
   def challenge(conn, params) do
+    IO.inspect conn
     case check_challenge(params) do
       {:ok, challenge} -> resp(conn, 200, challenge)
       :error           -> invalid_token(conn, params)
@@ -27,6 +28,7 @@ defmodule WebApi.WebhookController do
 
     Logger.info "token #{token}"
     Logger.info "verify_token #{verify_token}"
+    Logger.info "======================================="
 
     case token == verify_token do
       true -> {:ok, challenge}

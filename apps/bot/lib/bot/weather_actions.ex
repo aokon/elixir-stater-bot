@@ -13,8 +13,8 @@ defmodule Bot.WeatherActions do
 
   def merge(session, context, message) do
     context = case get_intent(message) do
-      "temperature" -> Map.put(context, :location, get_location(message))
-      "weather"     -> Map.put(context, :location, get_location(message))
+      "find_temperature" -> Map.put(context, :location, get_location(message))
+      "find_weather"     -> Map.put(context, :location, get_location(message))
       "greet"       -> %{}
       nil           -> %{}
     end
@@ -25,12 +25,12 @@ defmodule Bot.WeatherActions do
     # Handle error
   end
 
-  defaction get_forecast(session, context) do
+  defaction find_weather(session, context) do
     forecast = Client.weather(context.location)
-    Map.put(context, :forecast, forecast)
+    Map.put(context, :weather, forecast)
   end
 
-  defaction get_temperature(session, context) do
+  defaction find_temperature(session, context) do
     temperature = Client.temperature(context.location)
     Map.put(context, :temperature, temperature)
   end

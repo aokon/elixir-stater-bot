@@ -27,6 +27,8 @@ defmodule Bot.WeatherAPIClient do
       url(city)
       |> HTTPotion.get
 
+    IO.inspect res
+
     case res do
       %HTTPotion.Response{status_code: 500} -> :error
       resp -> Poison.decode! resp.body
